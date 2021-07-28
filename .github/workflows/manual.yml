@@ -15,7 +15,7 @@ jobs:
           repository: 'yosyshq/yosys'
       - name: Build
         run: |
-          docker run --rm -v $(pwd):/work yosyshq/manual:1.0 make -j${{ env.procs }}
+          docker run --rm -v $(pwd):/work yosyshq/manual:1.0 make -j4
           docker run --rm -v $(pwd):/work yosyshq/manual:1.0 make update-manual
           docker run --rm -v $(pwd):/work yosyshq/manual:1.0 make manual
       - uses: ncipollo/release-action@v1
