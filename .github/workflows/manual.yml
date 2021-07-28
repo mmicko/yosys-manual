@@ -15,16 +15,24 @@ jobs:
           repository: 'yosyshq/yosys'
       - name: Build
         run: |
-          docker run --rm -v $(pwd):/work yosyshq/manual:1.0 make -j4
+          docker run --rm -v $(pwd):/work yosyshq/manual:1.0 make -j5
           docker run --rm -v $(pwd):/work yosyshq/manual:1.0 make update-manual
           docker run --rm -v $(pwd):/work yosyshq/manual:1.0 make manual
       - uses: ncipollo/release-action@v1
         with:
           allowUpdates: True
-          prerelease: True
           omitBody: True
           omitBodyDuringUpdate: True
           omitNameDuringUpdate: True
           tag: manual
           artifacts: "manual/manual.pdf"
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: True
+          omitBody: True
+          omitBodyDuringUpdate: True
+          omitNameDuringUpdate: True
+          tag: manual
+          artifacts: "manual/presentation.pdf"
           token: ${{ secrets.GITHUB_TOKEN }}
